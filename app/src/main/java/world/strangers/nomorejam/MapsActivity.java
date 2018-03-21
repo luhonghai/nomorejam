@@ -9,6 +9,10 @@ import android.support.v7.widget.AppCompatEditText;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -42,6 +46,8 @@ public class MapsActivity extends BaseTiActivity<MapsActivityPresenter, MapsActi
     @BindView(R.id.adView)
     AdView adView;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +61,18 @@ public class MapsActivity extends BaseTiActivity<MapsActivityPresenter, MapsActi
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete);
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                getPresenter().pickAddress(place.getLatLng(), MapsActivityPresenter.LocationType.FROM);
+            }
+
+            @Override
+            public void onError(Status status) {
+
+            }
+        });
     }
 
 

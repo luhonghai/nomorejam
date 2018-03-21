@@ -35,7 +35,7 @@ import world.strangers.nomorejam.util.ColorHelper;
 public class MapsActivityPresenter extends BaseTiPresenter<MapsActivityView> {
     private static final String TAG = "MapsActivityPresenter";
 
-    private static final int MAX_CHANGE = 5;
+    private static final int MAX_CHANGE = 10;
 
     Geocoder geocoder;
 
@@ -146,7 +146,6 @@ public class MapsActivityPresenter extends BaseTiPresenter<MapsActivityView> {
                         polylineOptionsList.add(lineOptions);
                     }
                 }
-                break;
             }
             sendToView(v -> v.displayDirection(polylineOptionsList));
         }
@@ -178,10 +177,10 @@ public class MapsActivityPresenter extends BaseTiPresenter<MapsActivityView> {
         String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
 
         // Sensor enabled
-        String sensor = "sensor=false";
+        String sensor = "sensor=true";
         String mode = "mode=driving";
         // Building the parameters to the web service
-        String parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + mode;
+        String parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + mode + "&alternatives=true";
 
         // Output format
         String output = "json";

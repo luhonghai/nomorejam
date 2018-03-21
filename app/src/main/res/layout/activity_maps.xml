@@ -56,6 +56,19 @@
                     android:layout_height="30dp"
                     android:background="@color/white"
                     android:layout_margin="@dimen/define_dimen_8"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+                    <fragment
+                        android:id="@+id/place_autocomplete"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/define_dimen_8"
+                        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+
+                        />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
 
